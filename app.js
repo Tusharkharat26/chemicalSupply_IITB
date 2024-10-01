@@ -1,4 +1,5 @@
 let data = [
+  // Sample data
   {
     id: 1,
     name: "Ammonium Persulfate",
@@ -21,18 +22,6 @@ let data = [
     unit: "kg",
     quantity: 8751.99,
   },
-  {
-    id: 3,
-    name: "Dimethylaminopropylamino",
-    vendor: "LG Chem",
-    density: 8433.37,
-    viscosity: 12.62,
-    packaging: "Barrel",
-    packSize: "75.00",
-    unit: "L",
-    quantity: 5964.61,
-  },
-  // ... populate remaining 12 rows similarly
 ];
 
 let selectedRow = null;
@@ -44,6 +33,11 @@ function loadTableData() {
   data.forEach((item, index) => {
     const row = document.createElement("tr");
     row.innerHTML = `
+            <td>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="checkbox${index}">
+                </div>
+            </td>
             <td>${item.id}</td>
             <td>${item.name}</td>
             <td>${item.vendor}</td>
@@ -53,12 +47,14 @@ function loadTableData() {
             <td>${item.packSize}</td>
             <td>${item.unit}</td>
             <td>${item.quantity}</td>
+            <td><button class="btn btn-sm btn-warning" onclick="editRow(${index})">✏️</button></td>
         `;
     row.addEventListener("click", () => selectRow(index));
     tableBody.appendChild(row);
   });
 }
 
+// Select row
 function selectRow(index) {
   const rows = document.querySelectorAll("#chemicalTable tbody tr");
   rows.forEach((row) => row.classList.remove("selected"));
@@ -73,6 +69,52 @@ function sortTable(colIndex) {
     let valB = Object.values(b)[colIndex];
     return valA > valB ? 1 : -1;
   });
+  loadTableData();
+}
+
+// Edit a row
+function editRow(index) {
+  const row = data[index];
+  const tableRow = document.querySelectorAll("#chemicalTable tbody tr")[index];
+
+  tableRow.innerHTML = `
+    <td>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="checkbox${index}">
+        </div>
+    </td>
+    <td>${row.id}</td>
+    <td><input type="text" class="form-control" value="${row.name}" /></td>
+    <td><input type="text" class="form-control" value="${row.vendor}" /></td>
+    <td><input type="number" class="form-control" value="${row.density}" /></td>
+    <td><input type="number" class="form-control" value="${row.viscosity}" /></td>
+    <td><input type="text" class="form-control" value="${row.packaging}" /></td>
+    <td><input type="text" class="form-control" value="${row.packSize}" /></td>
+    <td><input type="text" class="form-control" value="${row.unit}" /></td>
+    <td><input type="number" class="form-control" value="${row.quantity}" /></td>
+    <td><button class="btn btn-sm btn-success" onclick="saveEdit(${index})">💾 Save</button></td>
+  `;
+}
+
+// Save the edited row
+function saveEdit(index) {
+  const tableRow = document.querySelectorAll("#chemicalTable tbody tr")[index];
+  const inputs = tableRow.querySelectorAll("input");
+
+  // Update data array with new values
+  data[index] = {
+    id: data[index].id,
+    name: inputs[1].value,
+    vendor: inputs[2].value,
+    density: parseFloat(inputs[3].value),
+    viscosity: parseFloat(inputs[4].value),
+    packaging: inputs[5].value,
+    packSize: inputs[6].value,
+    unit: inputs[7].value,
+    quantity: parseFloat(inputs[8].value),
+  };
+
+  // Reload table after saving
   loadTableData();
 }
 
@@ -134,4 +176,5 @@ document.getElementById("saveBtn").addEventListener("click", () => {
   console.log("Data saved:", JSON.stringify(data, null, 2));
 });
 
+// Initial table load
 window.onload = loadTableData;

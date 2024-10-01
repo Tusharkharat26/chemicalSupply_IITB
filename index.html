@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Supplies</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Chemical supplies</h2>
+        <div class="toolbar">
+            <button id="addRowBtn" class="btn">➕ Add</button>
+            <button id="moveUpBtn" class="btn">⬆ Move Up</button>
+            <button id="moveDownBtn" class="btn">⬇ Move Down</button>
+            <button id="deleteRowBtn" class="btn">🗑 Delete</button>
+            <button id="refreshBtn" class="btn">🔄 Refresh</button>
+            <button id="saveBtn" class="btn">💾 Save</button>
+        </div>
+        <table id="chemicalTable" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">ID</th>
+                    <th onclick="sortTable(1)">Chemical Name</th>
+                    <th onclick="sortTable(2)">Vendor</th>
+                    <th onclick="sortTable(3)">Density</th>
+                    <th onclick="sortTable(4)">Viscosity</th>
+                    <th onclick="sortTable(5)">Packaging</th>
+                    <th onclick="sortTable(6)">Pack Size</th>
+                    <th onclick="sortTable(7)">Unit</th>
+                    <th onclick="sortTable(8)">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be dynamically populated by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

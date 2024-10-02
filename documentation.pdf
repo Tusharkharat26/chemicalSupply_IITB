@@ -1,0 +1,68 @@
+Chemical Supplies Web App - Project Documentation
+
+
+***Project Overview***
+The Chemical Supplies Web App is a dynamic tool designed for managing chemical inventory. It allows users to add, edit, delete, move, and sort chemical data in a table. The application is built using HTML, CSS, JavaScript, and Bootstrap, and will be hosted on Netlify for easy access and deployment.
+
+***Key Features***
+Dynamic Table Management: Users can add new chemicals, edit existing data, delete entries, and move rows up or down in the table.
+Sorting Functionality: Columns such as chemical name, vendor, density, and others can be sorted by clicking the column headers.
+Edit Mode: Users can edit chemical details inline, providing a seamless experience.
+Data Persistence: For now, the data is stored in memory and reset upon refresh. Future enhancements could include integration with a backend or local storage.
+Hosting
+This application will be hosted on Netlify, leveraging its seamless deployment features. By simply connecting the GitHub repository or uploading the project directory, Netlify will automatically build and deploy the app. Netlify’s continuous integration (CI) will keep the app updated with every change pushed to the repository.
+
+***Hosting on Netlify***
+Prepare Your Code: Ensure your project has all necessary files, including index.html, style.css, and app.js. Netlify requires an index.html file to serve as the entry point for the web app.
+
+Deploying the Site:
+
+Navigate to Netlify.
+Create a new site from Git or upload the project folder directly.
+If using Git, connect your GitHub or GitLab account, and select the repository containing this project.
+Netlify will automatically detect the index.html file and deploy the app.
+Continuous Deployment: Every time you update the repository, Netlify will redeploy the app, ensuring it remains up-to-date.
+
+Design Approach
+The design of the Chemical Supplies Web App was based on simplicity, usability, and flexibility. Here are the major design choices and rationale:
+
+1. HTML Structure
+The application has a clean, semantic HTML structure that divides the layout into a container for the table and controls. The header and toolbar elements make the interface intuitive, and using <table> for displaying chemical data ensures a structured and organized presentation.
+
+2. CSS Styling
+A minimalist design has been applied using CSS to ensure the focus remains on the functionality of the app. Styling includes:
+
+Responsive Layout: The app uses percentage-based widths to adapt to various screen sizes.
+Bootstrap Integration: Bootstrap classes were used to simplify the styling of buttons, form inputs, and table. Custom CSS was added for further customization.
+Hover Effects: The table rows change color on hover, making it easier to track data entries visually.
+3. JavaScript Functionality
+The core logic of the application is implemented in JavaScript, handling interactions such as adding, editing, and deleting rows. The code is designed with the following principles in mind:
+
+Modular Design: Functions like loadTableData, editRow, saveEdit, and handleCheckbox each focus on a single responsibility, improving code readability and maintainability.
+
+Event-Driven Approach: Button interactions and table updates are controlled via event listeners, allowing dynamic user actions like sorting and refreshing.
+
+Sorting Algorithm: The sortTable function implements a basic comparison between column values, enabling sorting by various attributes such as density, viscosity, and vendor.
+
+4. Bootstrap Integration
+Using Bootstrap for responsive design speeds up development and ensures the application is mobile-friendly and consistent across browsers. Key Bootstrap components include:
+
+Buttons and Icons: Action buttons for adding, deleting, moving, and saving rows use Bootstrap's button classes, with icons for a modern look.
+Form Inputs: Input elements for editing chemical data are styled with Bootstrap’s form control classes.
+5. Data Handling
+Data Structure: The chemical data is stored in a JavaScript array of objects. Each object represents a chemical with attributes such as name, vendor, density, and more.
+Editable Rows: When a row is clicked for editing, the respective fields become editable. This is done by dynamically replacing the row’s static text with input fields.
+Sorting: The app allows sorting by any column, enabling users to quickly organize the data by relevant criteria.
+Future Enhancements
+Data Persistence: Currently, the app doesn’t retain data between sessions. Future versions could use localStorage, IndexedDB, or integrate with a backend (Node.js or a database) for persistent data.
+
+Search and Filter: A search bar could be implemented to filter the table by chemical name or vendor, improving usability for large datasets.
+
+Improved User Experience: Adding tooltips or confirmation dialogs (for deletion) would enhance the user experience, reducing errors during operations.
+
+
+
+Conclusion
+The Chemical Supplies Web App provides an efficient way to manage chemical inventory with intuitive controls and a clean UI. The application’s lightweight architecture and use of Bootstrap ensure it performs smoothly across different devices and screen sizes. Hosting it on Netlify guarantees that it will be easy to deploy and maintain.
+
+With future improvements like data persistence and search functionalities, the application could become an even more powerful tool for chemical management.

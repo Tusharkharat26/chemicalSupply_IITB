@@ -177,7 +177,7 @@ function loadTableData() {
     row.innerHTML = `
             <td>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="checkbox${index}">
+                    <input type="checkbox" class="form-check-input" id="checkbox${index}" onclick="handleCheckbox(${index})">
                 </div>
             </td>
             <td>${item.id}</td>
@@ -194,6 +194,19 @@ function loadTableData() {
     row.addEventListener("click", () => selectRow(index));
     tableBody.appendChild(row);
   });
+}
+
+// Handle checkbox behavior
+function handleCheckbox(index) {
+  const checkboxes = document.querySelectorAll(
+    "#chemicalTable tbody .form-check-input"
+  );
+  checkboxes.forEach((checkbox, i) => {
+    if (i !== index) {
+      checkbox.checked = false; // Uncheck all other checkboxes
+    }
+  });
+  selectedRow = index;
 }
 
 // Select row
@@ -215,14 +228,22 @@ function sortTable(colIndex) {
 }
 
 // Edit a row
+let editingRow = null;
+
 function editRow(index) {
+  // Close the previous row if it's being edited
+  if (editingRow !== null && editingRow !== index) {
+    saveEdit(editingRow); // Automatically save the previous row being edited
+  }
+
+  editingRow = index; // Set the new editing row
   const row = data[index];
   const tableRow = document.querySelectorAll("#chemicalTable tbody tr")[index];
 
   tableRow.innerHTML = `
     <td>
         <div class="form-check">
-            <input type="checkbox" class="form-check-input edit-btn" id="checkbox${index}">
+            <input type="checkbox" class="form-check-input" id="checkbox${index}" onclick="handleCheckbox(${index})">
         </div>
     </td>
     <td>${row.id}</td>
@@ -255,6 +276,9 @@ function saveEdit(index) {
     unit: inputs[7].value,
     quantity: parseFloat(inputs[8].value),
   };
+
+  // Reset the editingRow variable
+  editingRow = null;
 
   // Reload table after saving
   loadTableData();
@@ -313,7 +337,7 @@ document.getElementById("moveDownBtn").addEventListener("click", () => {
 // Refresh data
 document.getElementById("refreshBtn").addEventListener("click", loadTableData);
 
-// Save data (Mock function)
+// Save data
 document.getElementById("saveBtn").addEventListener("click", () => {
   console.log("Data saved:", JSON.stringify(data, null, 2));
 });
